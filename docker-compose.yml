@@ -1,0 +1,41 @@
+info_api:
+    build: .
+    env_file:
+        - container.env
+    command:
+        gunicorn --name info_api -b 0.0.0.0:8080 -w 2 wsgi:app
+    ports:
+        - "7080:8080"
+    links:
+        - redis1
+        - redis2
+
+celery:
+    build: .
+    env_file:
+        - container.env
+    command: celery worker -A service.workers.workers.celery --loglevel=INFO
+    links:
+        - redis1
+        - redis2
+
+celery_beats:
+    build: .
+    env_file:
+        - container.env
+    command: celery -A service.workers.workers.celery beat --loglevel=INFO
+    links:
+        - redis1
+        - redis2
+
+redis1:
+    image: redis
+    command: redis-server --port 6388 # Formatted infos cache
+    ports:
+        - "7388:6388"
+
+redis2:
+    image: redis
+    command: redis-server --port 6383 # Celery Backend
+    ports:
+        - "7383:6383"
