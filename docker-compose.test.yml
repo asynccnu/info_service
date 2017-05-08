@@ -1,0 +1,14 @@
+info_api_test:
+    build: .
+    env_file:
+        - container.test.env
+    command:
+        python -m tests.__init__
+    links:
+        - redis1
+
+redis1:
+    image: redis
+    command: redis-server --port 6388 # Formatted infos cache
+    ports:
+        - "7388:6388"

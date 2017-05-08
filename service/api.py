@@ -29,4 +29,4 @@ def api_webview_info():
         board_list = get_webview_board()
         webview_board.set('webview_board_list', board_list)
     all_board = ast.literal_eval(webview_board.get('webview_board_list'))
-    return jsonify(all_board)
+    return jsonify(all_board), 200

@@ -16,5 +16,6 @@ class Config(object):
 
 
 config = {
-    'default': Config
+    'default': Config,
+    'testing': Config
 }
