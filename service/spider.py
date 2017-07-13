@@ -82,14 +82,15 @@ def get_webview_huaqing():
     huaqing_page = requests.get(huaqing_url)
     huaqing_html = huaqing_page.content
     huaqing_soup = BeautifulSoup(huaqing_html, "lxml")
-    huaqing_list = huaqing_soup.find_all('ul', class_='e2')[0].find_all('li')
+    huaqing_list = huaqing_soup.find('div', id='content').find_all('li')
     result_list = []
     result_count = 0
     for i in huaqing_list:
+        i_a = i.find_all('a')[1]
         if i.a and result_count < 5:
-            title = i.a.contents[0]
-            date = i.contents[-1]
-            content_url = "http://www.ccnuyouth.com/" + i.a['href']
+            title = i_a.contents[0]
+            date = list(i.strings)[-2].strip()[:11]
+            content_url = "http://www.ccnuyouth.com/" + i_a['href']
             content_page = requests.get(content_url)
             content_html = content_page.content
             content_soup = BeautifulSoup(content_html, "lxml")
