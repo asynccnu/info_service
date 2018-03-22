@@ -4,7 +4,7 @@ import os
 import ast
 import json
 import redis
-from flask import request, jsonify, Blueprint
+from flask import request, jsonify, Blueprint, redirect
 from spider import get_webview_board
 
 api = Blueprint(
@@ -30,3 +30,7 @@ def api_webview_info():
         webview_board.set('webview_board_list', board_list)
     all_board = ast.literal_eval(webview_board.get('webview_board_list'))
     return jsonify(all_board), 200
+
+@api.route('/info/')
+def api_info():
+    return redirect('/info/') 
