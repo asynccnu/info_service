@@ -33,4 +33,4 @@ def api_webview_info():
 
 @api.route('/info/')
 def api_info():
-    return redirect('/info/') 
+    return redirect('/webview_info/') 
