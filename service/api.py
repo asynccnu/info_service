@@ -14,7 +14,7 @@ api = Blueprint(
         )
 
 webview_board = redis.StrictRedis(host=os.getenv('WEBVIEW_REDIS_HOST'), port=7388, db=0)
-cleanr = re.complile('<.*?>')
+cleanr = re.compile('<.*?>')
 
 @api.route('/webview_info/')
 def api_webview_info():
