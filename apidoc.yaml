@@ -1,0 +1,81 @@
+swagger: '2.0'
+
+#################################INFO START##########################
+info:
+  description: |
+    通知公告服务
+  version: 1.0.0
+  title: Info Service
+#  termsOfService: http://swagger.io/terms/
+  contact:
+    email: 3480437308@qq.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+###############################INFO END#################################
+
+host: ccnubux.muxixyz.com
+basePath: /api/
+schemes:
+ - https
+ - http
+######################TAG START#######################################
+# tags:
+# - name: auth
+  # description: 学而鉴权
+
+
+##########################TAG END######################################
+
+###########################AUTH START#################################
+
+
+
+
+########################PATH START####################################
+paths:
+  /info/:
+    get:
+      summary: 获取不含html的通知信息，ios使用该接口
+      produces:
+      - application/json
+      responses:
+        401:
+          description: 未授权
+        403:
+          description: 禁止访问
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                data:
+                  type: integer
+                appendix_list:
+                  type: string
+  /webview_info/:
+    get:
+      summary: 获取含html的通知信息,安卓使用该接口
+      produces:
+      - application/json
+      parameters:
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                data:
+                  type: integer
+                appendix_list:
+                  type: string
