@@ -72,7 +72,8 @@ def get_webview_zizhu():
         })
     return result_list
 
-
+# 华青域名已过期
+'''
 def get_webview_huaqing():
     """
     :function: get_webview_huaqing
@@ -117,7 +118,7 @@ def get_webview_huaqing():
                 })
             result_count += 1
     return result_list
-
+'''
 
 def get_webview_jiaowuchu(get_url):
     """
@@ -163,9 +164,8 @@ def get_webview_board():
     运行所有爬虫, 返回按时间排序的结果列表(for webview)
     """
     zizhu_list = get_webview_zizhu()
-    huaqing_list = get_webview_huaqing()
     jiaowuchu_list = get_webview_jiaowuchu(jiaowuchu1)
     jiaowuchu_list2 = get_webview_jiaowuchu(jiaowuchu2)
-    board_list = zizhu_list + huaqing_list +jiaowuchu_list + jiaowuchu_list2
+    board_list = zizhu_list + jiaowuchu_list + jiaowuchu_list2
     date_board_list = sorted(board_list, key=lambda d: d.get('date'), reverse=True)
     return date_board_list
